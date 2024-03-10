@@ -23,7 +23,7 @@ class Habit(models.Model):
     place_of_execution = models.CharField(max_length=256, verbose_name='место выполнения', **NULLABLE)
     action = models.TextField(verbose_name='действие')
     time_of_execution = models.DateTimeField(verbose_name='время начала выполнения', **NULLABLE)
-    time_to_complete = models.TimeField(verbose_name='длительность выполнения', **NULLABLE)
+    time_to_complete = models.PositiveIntegerField(verbose_name='длительность выполнения в секундах', **NULLABLE)
     periodicity_in_days = models.PositiveIntegerField(verbose_name='периодичность в днях')
     related_habit = models.ForeignKey('self', on_delete=models.CASCADE, verbose_name='связанная привычка', **NULLABLE)
     award = models.CharField(max_length=256, verbose_name='вознаграждение', **NULLABLE)
