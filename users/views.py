@@ -28,8 +28,9 @@ class UserProfile(generics.RetrieveUpdateDestroyAPIView):
     def perform_update(self, serializer):
         """Хеширование пароля при обновлении профиля"""
         user = serializer.save()
-        user.set_password(user.password)
-        user.save()
+        if "password" in self.request.data:
+            user.set_password(user.password)
+            user.save()
 
     def perform_destroy(self, instance):
         """При удалении пользователя происходит его деактивация"""

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'django_celery_beat',
 
     'users',
     'habit'
@@ -157,4 +158,17 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=150),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
+
+TELEGRAM_API_KEY = os.getenv('TELEGRAM_BOT_API')
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# Настройка периодических задач
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'habit.tasks.send_notification',
+        'schedule': timedelta(minutes=1),
+    },
 }
