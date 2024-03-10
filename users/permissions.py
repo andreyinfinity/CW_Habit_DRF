@@ -7,3 +7,11 @@ class IsSelf(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         return request.user == obj
+
+
+class IsOwner(BasePermission):
+    """Проверка является ли пользователь владельцем"""
+    message = 'Доступ разрешен только к своим привычкам'
+
+    def has_object_permission(self, request, view, obj):
+        return request.user == obj.user
