@@ -20,10 +20,10 @@ class Habit(models.Model):
     Признак публичности — привычки можно публиковать в общий доступ, чтобы другие пользователи могли брать в пример чужие привычки.
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='создатель')
-    place_of_execution = models.CharField(max_length=256, verbose_name='место выполнения')
+    place_of_execution = models.CharField(max_length=256, verbose_name='место выполнения', **NULLABLE)
     action = models.TextField(verbose_name='действие')
-    time_of_execution = models.TimeField(verbose_name='время начала выполнения')
-    time_to_complete = models.TimeField(verbose_name='длительность выполнения', **NULLABLE)
+    time_of_execution = models.DateTimeField(verbose_name='время начала выполнения', **NULLABLE)
+    time_to_complete = models.PositiveIntegerField(verbose_name='длительность выполнения в секундах', **NULLABLE)
     periodicity_in_days = models.PositiveIntegerField(verbose_name='периодичность в днях')
     related_habit = models.ForeignKey('self', on_delete=models.CASCADE, verbose_name='связанная привычка', **NULLABLE)
     award = models.CharField(max_length=256, verbose_name='вознаграждение', **NULLABLE)
@@ -34,3 +34,6 @@ class Habit(models.Model):
         verbose_name = 'привычка'
         verbose_name_plural = 'привычки'
         ordering = ['action']
+
+    def __str__(self):
+        return f'{self.action}'
