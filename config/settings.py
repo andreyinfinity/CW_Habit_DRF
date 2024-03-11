@@ -61,12 +61,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -99,6 +99,8 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DB'),
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST'),
+        'PORT': os.getenv('POSTGRES_PORT'),
     }
 }
 
@@ -162,10 +164,23 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'Basic': {
+            'type': 'basic'
+      },
+      'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+      }
+   }
+}
+
 TELEGRAM_API_KEY = os.getenv('TELEGRAM_BOT_API')
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
 
 # Настройка периодических задач
 CELERY_BEAT_SCHEDULE = {
@@ -177,12 +192,11 @@ CELERY_BEAT_SCHEDULE = {
 
 # Настройка CORS
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8000',  # Замените на адрес вашего фронтенд-сервера
+    'http://localhost:8000',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://read-and-write.example.com", #  Замените на адрес вашего фронтенд-сервера
-    # и добавьте адрес бэкенд-сервера
+    "http://localhost:8000",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = False

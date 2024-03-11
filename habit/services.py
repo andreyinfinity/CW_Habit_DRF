@@ -23,8 +23,10 @@ def create_message(habit, user):
     """Функция создания сообщения"""
     if habit.award:
         award = f"После ты получишь {habit.award}!"
-    else:
+    elif habit.related_habit:
         award = f"После надо {habit.related_habit.action}!"
+    else:
+        return "Привет"
     message = (f"Привет, {user}! "
                f"Сегодня в {habit.time_of_execution.strftime('%H:%M')} "
                f"в {habit.place_of_execution} "
