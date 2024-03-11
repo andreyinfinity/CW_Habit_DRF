@@ -3,7 +3,6 @@ from rest_framework.permissions import IsAuthenticated
 from habit.models import Habit
 from habit.paginators import HabitPaginator
 from habit.serializers import HabitSerializer
-from habit.tasks import send_notification
 from users.permissions import IsOwner
 
 
