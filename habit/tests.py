@@ -123,13 +123,21 @@ class HabitTestCase(APITestCase):
             }
         )
 
-    def test_patch_habit(self):
+    def test_put_habit(self):
         """Тест редактирования привычки"""
         # Эндпойнт редактирования привычки
         url = reverse('habit:habit', args=[self.habit.pk])
-
-        response = self.client.patch(path=url, data={'action': '10 приседаний'})
-        print(response.json())
+        data = {
+            "time_to_complete": 120,
+            "periodicity_in_days": 1,
+            "place_of_execution": "дом",
+            "action": "10 приседаний",
+            "time_of_execution": "2024-03-10 00:00",
+            "award": "мороженка",
+            "is_pleasant": False,
+            "is_public": False,
+        }
+        response = self.client.patch(path=url, data=data)
         # Проверка статуса ответа
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         # Проверка ответа
