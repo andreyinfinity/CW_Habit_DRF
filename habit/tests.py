@@ -60,7 +60,7 @@ class HabitTestCase(APITestCase):
                 'periodicity_in_days': 1,
                 'place_of_execution': 'дом',
                 'related_habit': None,
-                'time_of_execution': '2024-03-10T00:00:00Z',
+                'time_of_execution': '2024-03-10T00:00:00',
                 'time_to_complete': 120,
                 'user': self.user.pk
             }
@@ -90,7 +90,7 @@ class HabitTestCase(APITestCase):
                     'periodicity_in_days': 1,
                     'place_of_execution': 'дом',
                     'related_habit': None,
-                    'time_of_execution': '2024-03-10T00:00:00Z',
+                    'time_of_execution': '2024-03-10T00:00:00',
                     'time_to_complete': 120,
                     'user': self.user.pk
                 }]}
@@ -117,7 +117,7 @@ class HabitTestCase(APITestCase):
                 'periodicity_in_days': 1,
                 'place_of_execution': 'дом',
                 'related_habit': None,
-                'time_of_execution': '2024-03-10T00:00:00Z',
+                'time_of_execution': '2024-03-10T00:00:00',
                 'time_to_complete': 120,
                 'user': self.user.pk
             }
@@ -152,7 +152,7 @@ class HabitTestCase(APITestCase):
                 'periodicity_in_days': 1,
                 'place_of_execution': 'дом',
                 'related_habit': None,
-                'time_of_execution': '2024-03-10T00:00:00Z',
+                'time_of_execution': '2024-03-10T00:00:00',
                 'time_to_complete': 120,
                 'user': self.user.pk
             }
