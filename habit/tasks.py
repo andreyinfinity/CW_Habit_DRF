@@ -9,8 +9,8 @@ from habit.services import send_telegram_message
 def send_notification():
     """Функция отправки уведомлений пользователям"""
     current_time = datetime.now(timezone.utc)
-    # получение всех привычек, у которых время начала выполнения меньше либо равно текущему
-    habits = Habit.objects.all().filter(time_of_execution__lte=current_time)
+    # получение всех полезных привычек, у которых время начала выполнения меньше либо равно текущему
+    habits = Habit.objects.all().filter(time_of_execution__lte=current_time, is_pleasant=False)
     if habits:
         for habit in habits:
             send_telegram_message(habit)

@@ -8,7 +8,6 @@ send_message_url = f'https://api.telegram.org/bot{telegram_token}/sendMessage'
 
 def send_telegram_message(habit):
     """Функция отправки сообщения в телеграм"""
-
     user = habit.user
     message = create_message(habit, user)
     requests.post(
@@ -26,7 +25,7 @@ def create_message(habit, user):
     elif habit.related_habit:
         award = f"После надо {habit.related_habit.action}!"
     else:
-        return "Привет"
+        return "Привет, у вас еще нет полезных привычек."
     message = (f"Привет, {user}! "
                f"Сегодня в {habit.time_of_execution.strftime('%H:%M')} "
                f"в {habit.place_of_execution} "
